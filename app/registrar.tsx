@@ -4,16 +4,16 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router"; // Usamos useRouter para la redirección
 
-export default function IniciarSesion() {
+export default function Registrar() {
   const [usuario, setUsuario] = useState(""); // Estado para el usuario
   const [contrasena, setContrasena] = useState(""); // Estado para la contraseña
   const router = useRouter(); // Hook para manejar la redirección
 
-  // Función para manejar el inicio de sesión
-  const iniciarSesion = () => {
+  // Función para manejar el registro
+  const registrar = () => {
     if (usuario && contrasena) {
-      alert("Iniciaste sesión con éxito");
-      // Lógica para redirigir a la página principal después del login
+      alert("Te registraste con éxito");
+      // Lógica para redirigir a la página de inicio de sesión después del registro
     } else {
       alert("Por favor ingresa usuario y contraseña");
     }
@@ -38,18 +38,16 @@ export default function IniciarSesion() {
           value={contrasena}
           onChangeText={setContrasena}
         />
+        
+        {/* Botón para registrar */}
+        <TouchableOpacity style={styles.button} onPress={registrar}>
+          <Text style={styles.buttonText}>Registrar</Text>
+        </TouchableOpacity>
 
-        {/* Contenedor para los botones "Entrar" y "Registrar" */}
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button} onPress={iniciarSesion}>
-            <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
-
-          {/* Botón para redirigir a la página de registro */}
-          <TouchableOpacity style={styles.button} onPress={() => router.push("../registrar")}>
-            <Text style={styles.buttonText}>Registrar</Text>
-          </TouchableOpacity>
-        </View>
+        {/* Botón para redirigir a la página de inicio de sesión */}
+        <TouchableOpacity style={styles.button} onPress={() => router.push("../iniciarsesion")}>
+          <Text style={styles.buttonText}>Volver</Text>
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity style={styles.fingerprintButton}>
@@ -94,7 +92,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    //backgroundColor: "rgba(0, 0, 0, 0.3)",
     padding: 20,
     borderRadius: 10,
     width: "75%",
@@ -109,16 +106,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonsContainer: {
-    flexDirection: "row", // Hace que los botones estén en una fila
-    justifyContent: "space-between", // Distribuye el espacio entre los botones
-    width: "100%", // Asegura que los botones ocupen todo el ancho disponible
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
   },
   button: {
     padding: 15,
     backgroundColor: "#038d8d",
     borderRadius: 5,
     marginTop: 10,
-    width: "46%", // Ajusta el tamaño de cada botón
+    width: "46%",
     alignItems: "center",
   },
   buttonText: {
