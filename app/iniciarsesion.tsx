@@ -14,7 +14,7 @@ export default function IniciarSesion() {
   const iniciarSesion = () => {
     if (usuario && contrasena) {
       alert("Iniciaste sesión con éxito");
-      // Lógica para redirigir a la página principal después del login
+      router.push("../paginaprincipal");
     } else {
       alert("Por favor ingresa usuario y contraseña");
     }
