@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router"; // Usamos useRouter para la redirección
+import { useRouter, Stack } from "expo-router"; // Usamos useRouter para la redirección, importamos Stack también
 
 export default function Registrar() {
   const [usuario, setUsuario] = useState(""); // Estado para el usuario
@@ -20,8 +20,13 @@ export default function Registrar() {
   };
 
   return (
+    <>
+      {/* Oculta el header de la pantalla */}
+      <Stack.Screen options={{ headerShown: false }} />
     <LinearGradient colors={["#000000", "#038d8d"]} style={styles.background}>
-      <View style={styles.triangleUp} />
+      <Text style={styles.lineTextVidaPlan}>VIDA PLAN</Text>
+      <View style={styles.topLine} />
+      <Text style={styles.lineTextRegistrar}>REGISTRAR</Text>
       <View style={styles.container}>
         <TextInput
           style={styles.input}
@@ -39,23 +44,25 @@ export default function Registrar() {
           onChangeText={setContrasena}
         />
         
-        {/* Botón para registrar */}
-        <TouchableOpacity style={styles.button} onPress={registrar}>
-          <Text style={styles.buttonText}>Registrar</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonsContainer}>
+          {/* Botón para registrar */}
+          <TouchableOpacity style={styles.button} onPress={registrar}>
+            <Text style={styles.buttonText}>Registrar</Text>
+          </TouchableOpacity>
 
-        {/* Botón para redirigir a la página de inicio de sesión */}
-        <TouchableOpacity style={styles.button} onPress={() => router.push("../iniciarsesion")}>
-          <Text style={styles.buttonText}>Volver</Text>
-        </TouchableOpacity>
+          {/* Botón para redirigir a la página de inicio de sesión */}
+          <TouchableOpacity style={styles.button} onPress={() => router.push("../iniciarsesion")}>
+            <Text style={styles.buttonText}>Volver</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <TouchableOpacity style={styles.fingerprintButton}>
         <MaterialIcons name="fingerprint" size={50} color="white" />
       </TouchableOpacity>
 
-      <View style={styles.triangleDown} />
     </LinearGradient>
+    </>
   );
 }
 
@@ -65,33 +72,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  triangleUp: {
+  topLine: {
     position: "absolute",
-    top: "18%",
-    width: 0,
-    height: 0,
-    borderLeftWidth: 70,
-    borderRightWidth: 70,
-    borderBottomWidth: 120,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderBottomColor: "white",
+    top: "22%",
+    height: 6, // Grosor de la línea
+    width: "65%", // O 100% si quieres que vaya de borde a borde
+    backgroundColor: "yellow",
+    borderRadius: 3,
   },
-  triangleDown: {
+  lineTextVidaPlan: {
     position: "absolute",
-    bottom: "23.9%",
-    width: 0,
-    height: 0,
-    borderLeftWidth: 70,
-    borderRightWidth: 70,
-    borderTopWidth: 120,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderTopColor: "white",
+    top: "17%",
+    color: "white",
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 5, // Espacio entre texto y línea
+  },
+  lineTextRegistrar: {
+    position: "absolute",
+    top: "25%",
+    color: "white",
+    fontSize: 13,
+    fontWeight: "bold",
+    marginBottom: 5, // Espacio entre texto y línea
   },
   container: {
     justifyContent: "center",
     alignItems: "center",
+    position: "absolute",
+    top: "37%",
     padding: 20,
     borderRadius: 10,
     width: "75%",
@@ -124,6 +133,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   fingerprintButton: {
-    top: "17%",
+    position: "absolute",
+    top: "75%",
   },
 });
